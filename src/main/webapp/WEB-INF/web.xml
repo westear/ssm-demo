@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
+	id="WebApp_ID" version="3.0">
+  <display-name>ssm-demo</display-name>
+  
+  <!-- 解决WARN:No appenders could be found for logger 
+  		(org.springframework.web.context.ContextLoader) -->
+  <!--  默认先去代码src目录下去找log4j.properties,需要手动查找则进行context-param配置以及log4j监听器 -->
+  <context-param>
+  	<param-name>log4jConfigLocation</param-name>
+  	<param-value>classpath:configs/log/log4j.properties</param-value>
+  </context-param>
+  
+  <!-- 定义log4j监听器 --> 
+  <listener> 
+   	 <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class> 
+  </listener> 
+  
+  <!-- 编码过滤器 -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<async-supported>true</async-supported>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- Spring应用上下文，理解层次化的ApplicationContext,
+  		父上下文不能访问子上下文，而子上下文可以访问父上下文 -->
+  <!-- 在应用完全启动完成之前调用listener实现ContextLoaderListener，
+  		根据context-param将数据信息存入ServletContext（全局），
+  		加载context-param指定的配置文件信息到IOC容器中，给整个应用共享 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:configs/spring/applicationContext*.xml</param-value>
+  </context-param>
+  
+  <listener>
+  	<listener-class>
+  		org.springframework.web.context.ContextLoaderListener
+  	</listener-class>
+  </listener>
+  
+  <!-- DispatcherServlet, Spring MVC的核心,可以有多个DispatcherServlet -->
+  <!-- 初始化自己的上下文信息servletContext,并加载其设置的配置信息到该上下文中,
+  		将WebApplicationContext设置为它的父容器(父上下文) -->
+  <servlet>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  	<init-param>
+  		<param-name>contextConfigLocation</param-name>
+  		<param-value>classpath:configs/spring/mvc-dispatcher-servlet.xml</param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
+  	<async-supported>true</async-supported>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>mvc-dispatcher</servlet-name>
+  	<!-- mvc-dispatcher拦截所有的请求 -->
+  	<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <!-- 此后的所有servlet的初始化都按照以上方式创建，
+  	       初始化自己的上下文环境，将WebApplicationContext设置为自己的父上下文环境 -->
+</web-app>

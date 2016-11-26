@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<!DOCTYPE generatorConfiguration    
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+  
+<!-- 利用MyBatis生成器自动生成实体类、DAO接口和Mapping映射文件 -->  
+<generatorConfiguration>    
+<!-- 数据库驱动-->    
+    <classPathEntry  location="D:\maven\local\repo\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar"/>    
+    <context id="DB2Tables"  targetRuntime="MyBatis3">    
+        <commentGenerator>    
+            <property name="suppressDate" value="true"/>    
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->    
+            <property name="suppressAllComments" value="true"/>    
+        </commentGenerator>    
+        <!--数据库链接URL，用户名、密码 -->    
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL" userId="ssm_demo" password="ssmdemo">    
+        </jdbcConnection>    
+        <javaTypeResolver>    
+            <property name="forceBigDecimals" value="false"/>    
+        </javaTypeResolver>    
+        <!-- 生成模型的包名和位置-->    
+        <javaModelGenerator targetPackage="com.westear.ssm.model" targetProject="ssm-demo\src\main\java">    
+            <property name="enableSubPackages" value="true"/>    
+            <property name="trimStrings" value="true"/>    
+        </javaModelGenerator>    
+        <!-- 生成映射文件的包名和位置-->    
+        <sqlMapGenerator targetPackage="com.westear.ssm.mapping" targetProject="ssm-demo\src\main\java">    
+            <property name="enableSubPackages" value="true"/>    
+        </sqlMapGenerator>    
+        <!-- 生成DAO的包名和位置-->    
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.westear.ssm.dao" targetProject="ssm-demo\src\main\java">    
+            <property name="enableSubPackages" value="true"/>    
+        </javaClientGenerator>    
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->  
+        <table tableName="USER_TEST" domainObjectName="UserTest" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+        <!-- 完成配置后请运行maven命令：mybatis-generator:generator -->  
+    </context>
+</generatorConfiguration>
