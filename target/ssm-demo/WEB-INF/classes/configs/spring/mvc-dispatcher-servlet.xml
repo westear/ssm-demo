@@ -9,10 +9,14 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd    
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    <!-- 激活注解方式，如果不激活注解方式扫描，则不可以使用根据注解扫描@Controller类的方式扫描Controller -->
+	<context:annotation-config />
 	
 	<!-- 自动扫描该包，使springMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.westear.ssm" >
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<!-- DispatcherServlet上下文，只搜索@Controller标注的类，不搜其他标注的类 -->
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
 	<!-- 也可以指定文件夹扫描 -->
 <!-- 	<context:component-scan base-package="com.westear.ssm.controller" /> -->

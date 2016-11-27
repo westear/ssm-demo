@@ -5,6 +5,10 @@
 	id="WebApp_ID" version="3.0">
   <display-name>ssm-demo</display-name>
   
+  <welcome-file-list>
+	<welcome-file>/user/addUser</welcome-file>
+  </welcome-file-list>
+	
   <!-- 解决WARN:No appenders could be found for logger 
   		(org.springframework.web.context.ContextLoader) -->
   <!--  默认先去代码src目录下去找log4j.properties,需要手动查找则进行context-param配置以及log4j监听器 -->
@@ -40,7 +44,7 @@
   		加载context-param指定的配置文件信息到IOC容器中，给整个应用共享 -->
   <context-param>
   	<param-name>contextConfigLocation</param-name>
-  	<param-value>classpath:configs/spring/applicationContext*.xml</param-value>
+  	<param-value>classpath:configs/spring/applicationContext.xml</param-value>
   </context-param>
   
   <listener>
@@ -70,4 +74,5 @@
   </servlet-mapping>
   <!-- 此后的所有servlet的初始化都按照以上方式创建，
   	       初始化自己的上下文环境，将WebApplicationContext设置为自己的父上下文环境 -->
+  	       
 </web-app>

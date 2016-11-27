@@ -9,6 +9,9 @@
                         http://www.springframework.org/schema/context/spring-context-3.1.xsd    
                         http://www.springframework.org/schema/mvc    
                         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+    
+    <!-- 激活注解方式，如果不激活注解方式扫描，则不可以使用根据注解扫描@Controller类的方式扫描Controller -->
+	<context:annotation-config />
 	
 	<!-- 自动扫描该包，使springMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.westear.ssm" >
@@ -78,7 +81,9 @@
 	
 	<!-- 定义跳转的文件的前后缀，视图模式配置 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/"/>
-		<property name="suffix" value=".jsp"/>
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
 	</bean>
 </beans>
