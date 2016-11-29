@@ -1,3 +1,0 @@
-generatorConfig.xml文件的编码格式应该为GBK或者ASCII，
-如果使用utf-8格式则严格按照<!-- some description -->的格式进行注释（注释两侧必须保留空格）。
-如果仍然报错：不能出现“--”,只能把注释全部去掉。
