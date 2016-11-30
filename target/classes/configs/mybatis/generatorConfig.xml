@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>    
+<?xml version="1.0" encoding="GBK"?>    
 <!DOCTYPE generatorConfiguration    
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-  
-<!-- åˆ©ç”¨MyBatisç”Ÿæˆå™¨è‡ªåŠ¨ç”Ÿæˆå®žä½“ç±»ã€DAOæŽ¥å£å’ŒMappingæ˜ å°„æ–‡ä»¶ -->  
+
+<!-- ÀûÓÃMyBatisÉú³ÉÆ÷×Ô¶¯Éú³ÉÊµÌåÀà¡¢DAO½Ó¿ÚºÍMappingÓ³ÉäÎÄ¼þ -->  
 <generatorConfiguration>    
-<!-- æ•°æ®åº“é©±åŠ¨-->    
-    <classPathEntry  location="D:\maven\local\repo\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar"/>    
+<!-- Êý¾Ý¿âÇý¶¯-->    
+    <classPathEntry  location="D:\maven\mvnRespo\com\oracle\ojdbc14\10.2.0.4.0\ojdbc14-10.2.0.4.0.jar"/>    
     <context id="DB2Tables"  targetRuntime="MyBatis3">    
         <commentGenerator>    
             <property name="suppressDate" value="true"/>    
-            <!-- æ˜¯å¦åŽ»é™¤è‡ªåŠ¨ç”Ÿæˆçš„æ³¨é‡Š trueï¼šæ˜¯ ï¼š false:å¦ -->    
+            <!-- ÊÇ·ñÈ¥³ý×Ô¶¯Éú³ÉµÄ×¢ÊÍ true£ºÊÇ £º false:·ñ -->    
             <property name="suppressAllComments" value="true"/>    
         </commentGenerator>    
-        <!--æ•°æ®åº“é“¾æŽ¥URLï¼Œç”¨æˆ·åã€å¯†ç  -->    
+        <!-- Êý¾Ý¿âÁ´½ÓURL£¬ÓÃ»§Ãû¡¢ÃÜÂë -->    
         <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@localhost:1521:ORCL" userId="ssm_demo" password="ssmdemo">    
         </jdbcConnection>    
         <javaTypeResolver>    
             <property name="forceBigDecimals" value="false"/>    
         </javaTypeResolver>    
-        <!-- ç”Ÿæˆæ¨¡åž‹çš„åŒ…åå’Œä½ç½®-->    
+        <!-- Éú³ÉÄ£ÐÍµÄ°üÃûºÍÎ»ÖÃ-->    
         <javaModelGenerator targetPackage="com.westear.ssm.model" targetProject="src\main\java">    
             <property name="enableSubPackages" value="true"/>    
             <property name="trimStrings" value="true"/>    
         </javaModelGenerator>    
-        <!-- ç”Ÿæˆæ˜ å°„æ–‡ä»¶çš„åŒ…åå’Œä½ç½®-->    
-        <sqlMapGenerator targetPackage="com.westear.ssm.mapping" targetProject="src\main\java">    
+        <!-- Éú³ÉÓ³ÉäÎÄ¼þµÄ°üÃûºÍÎ»ÖÃ -->    
+        <sqlMapGenerator targetPackage="mapper" targetProject="src\main\resources">    
             <property name="enableSubPackages" value="true"/>    
         </sqlMapGenerator>    
-        <!-- ç”ŸæˆDAOçš„åŒ…åå’Œä½ç½®-->    
+        <!-- Éú³ÉDAOµÄ°üÃûºÍÎ»ÖÃ -->    
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.westear.ssm.dao" targetProject="src\main\java">    
             <property name="enableSubPackages" value="true"/>    
         </javaClientGenerator>    
-        <!-- è¦ç”Ÿæˆçš„è¡¨ tableNameæ˜¯æ•°æ®åº“ä¸­çš„è¡¨åæˆ–è§†å›¾å domainObjectNameæ˜¯å®žä½“ç±»å-->  
-        <table tableName="USER_TEST" domainObjectName="UserTest" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
-        <!-- å®Œæˆé…ç½®åŽè¯·è¿è¡Œmavenå‘½ä»¤ï¼šmybatis-generator:generator -->  
+        <!-- ÒªÉú³ÉµÄ±í tableNameÊÇÊý¾Ý¿âÖÐµÄ±íÃû»òÊÓÍ¼Ãû domainObjectNameÊÇÊµÌåÀàÃû -->  
+        <table tableName="W_USER" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>  
+        <!-- Íê³ÉÅäÖÃºóÇëÔËÐÐmavenÃüÁî£ºmybatis-generator:generate -->  
     </context>
 </generatorConfiguration>

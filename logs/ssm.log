@@ -544,3 +544,18 @@
 [INFO] [2016-11-27 22:26:20][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'mvc-dispatcher': initialization completed in 554 ms
 [WARN] [2016-11-27 22:26:36][org.springframework.web.servlet.PageNotFound]No mapping found for HTTP request with URI [/] in DispatcherServlet with name 'mvc-dispatcher'
 [WARN] [2016-11-27 22:26:42][org.springframework.web.servlet.PageNotFound]No mapping found for HTTP request with URI [/user] in DispatcherServlet with name 'mvc-dispatcher'
+[INFO] [2016-11-30 14:37:52][org.springframework.web.context.ContextLoader]Root WebApplicationContext: initialization started
+[INFO] [2016-11-30 14:37:52][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing Root WebApplicationContext: startup date [Wed Nov 30 14:37:52 CST 2016]; root of context hierarchy
+[INFO] [2016-11-30 14:37:52][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [configs/mybatis/spring-mybatis.xml]
+[INFO] [2016-11-30 14:37:52][org.springframework.beans.factory.config.PropertyPlaceholderConfigurer]Loading properties file from class path resource [configs/jdbc/jdbc.properties]
+[INFO] [2016-11-30 14:37:52][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-11-30 14:37:53][org.springframework.web.context.ContextLoader]Root WebApplicationContext: initialization completed in 629 ms
+[INFO] [2016-11-30 14:37:53][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'mvc-dispatcher': initialization started
+[INFO] [2016-11-30 14:37:53][org.springframework.web.context.support.XmlWebApplicationContext]Refreshing WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Wed Nov 30 14:37:53 CST 2016]; parent: Root WebApplicationContext
+[INFO] [2016-11-30 14:37:53][org.springframework.beans.factory.xml.XmlBeanDefinitionReader]Loading XML bean definitions from class path resource [configs/spring/mvc-dispatcher-servlet.xml]
+[INFO] [2016-11-30 14:37:53][org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor]JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+[INFO] [2016-11-30 14:37:53][org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping]Mapped "{[/user/addUser],methods=[GET],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.westear.ssm.controller.UserController.addUser(org.springframework.ui.Model)
+[INFO] [2016-11-30 14:37:53][org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter]Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Wed Nov 30 14:37:53 CST 2016]; parent: Root WebApplicationContext
+[INFO] [2016-11-30 14:37:53][org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter]Looking for @ControllerAdvice: WebApplicationContext for namespace 'mvc-dispatcher-servlet': startup date [Wed Nov 30 14:37:53 CST 2016]; parent: Root WebApplicationContext
+[INFO] [2016-11-30 14:37:53][org.springframework.web.servlet.handler.SimpleUrlHandlerMapping]Mapped URL path [/resources] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+[INFO] [2016-11-30 14:37:54][org.springframework.web.servlet.DispatcherServlet]FrameworkServlet 'mvc-dispatcher': initialization completed in 891 ms

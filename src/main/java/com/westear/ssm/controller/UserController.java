@@ -35,7 +35,7 @@ public class UserController {
 	public String addUser(Model model){
 		System.out.println("in the Controller(user/addUser)");
 		User user = new User();
-		user.setId(UUID.randomUUID().toString());
+		user.setId("wwwwwwwww");
 		user.setUsername("westear");
 		user.setPsw(EncryptPsw.encryptByMD("westear514*"));
 		this.userService.addUser(user);

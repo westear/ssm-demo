@@ -1,6 +1,5 @@
 package com.westear.ssm.service.impl;
 
-import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,14 @@ import com.westear.ssm.service.UserService;
 @Service("userService")
 @Transactional
 public class UserServiceImpl implements UserService {
-
+	
 	@Autowired
-	private UserMapper userMapper;
+	private UserMapper UserMapper;
 	
 	@Override
 	public void addUser(User user) {
-		if(userMapper != null){
-			userMapper.insert(user);
+		if(UserMapper != null){
+			UserMapper.insert(user);
 			System.out.println("=======>in addUser serviceImpl");
 		}
 	}
@@ -28,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(String id) {
 		System.out.println("=======>in getUserById serviceImpl");
-		return this.userMapper.selectByPrimaryKey(id);
+		return this.UserMapper.selectByPrimaryKey(id);
 	}
 
 }
