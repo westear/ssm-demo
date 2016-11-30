@@ -2,6 +2,8 @@ package com.westear.ssm.controller;
 
 import java.util.UUID;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class UserController {
 		System.out.println("==============>in the controller(user)");
 	}
 	
-	@Autowired
+	@Resource
 	private UserService userService;
 	
 	@RequestMapping(value="/addUser",method=RequestMethod.GET)

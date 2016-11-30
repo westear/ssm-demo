@@ -3,7 +3,7 @@ package com.westear.ssm.common.util;
 import java.security.MessageDigest;
 
 /**
- * ÃÜÂë¼ÓÃÜ¹¤¾ßÀà
+ * å¯†ç åŠ å¯†å·¥å…·ç±»
  * @author westear
  *
  */
@@ -16,9 +16,9 @@ public class EncryptPsw {
 	private static final String KEY_SHA = "SHA-256";
 	
 	/**
-	 * »ùÓÚMD5£¬µÃµ½32Î»¼ÓÃÜ×Ö·û´®
-	 * @param psw	ÃÜÂë
-	 * @return	32Î»¼ÓÃÜ×Ö·û´®
+	 * åŸºäºMD5ï¼Œå¾—åˆ°32ä½åŠ å¯†å­—ç¬¦ä¸²
+	 * @param psw	å¯†ç 
+	 * @return	32ä½åŠ å¯†å­—ç¬¦ä¸²
 	 */
 	public static String encryptByMD(String psw){
 		StringBuffer sb = new StringBuffer();
@@ -27,7 +27,7 @@ public class EncryptPsw {
 			byte[] inputData = psw.getBytes("utf-8");
 			md.update(inputData);
 			byte byteData[] = md.digest();
-			// ¶ş½øÖÆ×ª»»ÎªÊ®Áù½øÖÆ
+			// äºŒè¿›åˆ¶è½¬æ¢ä¸ºåå…­è¿›åˆ¶
 			for(int i = 0; i < byteData.length; i++){
 				sb.append(Integer.toString((byteData[i] & 0xff)+0x100, 16).substring(1));
 			}
@@ -38,9 +38,9 @@ public class EncryptPsw {
 	}
 	
 	/**
-	 * »ùÓÚSHA-256£¬µÃµ½64Î»¼ÓÃÜ×Ö·û´®
-	 * @param psw	ÃÜÂë
-	 * @return	64Î»¼ÓÃÜ×Ö·û´®
+	 * åŸºäºSHA-256ï¼Œå¾—åˆ°64ä½åŠ å¯†å­—ç¬¦ä¸²
+	 * @param psw	å¯†ç 
+	 * @return	64ä½åŠ å¯†å­—ç¬¦ä¸²
 	 */
 	public static String encryptBySHA(String psw){
 		StringBuffer sb = new StringBuffer();
@@ -49,7 +49,7 @@ public class EncryptPsw {
 			MessageDigest messageDigest = MessageDigest.getInstance(KEY_SHA);
 			messageDigest.update(inputData);
 			byte byteData[] = messageDigest.digest();
-			// ¶ş½øÖÆ×ª»»ÎªÊ®Áù½øÖÆ
+			// äºŒè¿›åˆ¶è½¬æ¢ä¸ºåå…­è¿›åˆ¶
 			for(int i = 0; i < byteData.length; i++){
 				sb.append(Integer.toString((byteData[i] & 0xff)+0x100, 16).substring(1));
 			}
@@ -60,7 +60,7 @@ public class EncryptPsw {
 	}
 	
 	public static void main(String[] args){
-		System.out.println("MD5¼ÓÃÜºóµÄ×Ö·û´®:"+EncryptPsw.encryptByMD("test123")+"==="+EncryptPsw.encryptByMD("westear514*").length());
-		System.out.println("SHA-256¼ÓÃÜºóµÄ×Ö·û´®:"+EncryptPsw.encryptBySHA("test123*")+"==="+EncryptPsw.encryptBySHA("westear514*").length());
+		System.out.println("MD5åŠ å¯†åçš„å­—ç¬¦ä¸²:"+EncryptPsw.encryptByMD("test123")+"==="+EncryptPsw.encryptByMD("westear514*").length());
+		System.out.println("SHA-256åŠ å¯†åçš„å­—ç¬¦ä¸²:"+EncryptPsw.encryptBySHA("test123*")+"==="+EncryptPsw.encryptBySHA("westear514*").length());
 	}
 }

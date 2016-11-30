@@ -37,6 +37,7 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
+  
   <!-- Spring应用上下文，理解层次化的ApplicationContext,
   		父上下文不能访问子上下文，而子上下文可以访问父上下文 -->
   <!-- 在应用完全启动完成之前调用listener实现ContextLoaderListener，
@@ -45,6 +46,12 @@
   <context-param>
   	<param-name>contextConfigLocation</param-name>
   	<param-value>classpath:configs/spring/applicationContext.xml</param-value>
+  </context-param>
+  
+  <!-- Spring和mybatis的配置文件 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<param-value>classpath:configs/mybatis/spring-mybatis.xml</param-value>
   </context-param>
   
   <listener>
