@@ -1,6 +1,7 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
 <%@ include file="/jsp/common/top.jsp" %>
 <title>LOGIN</title>
-<%-- <link type="text/css" href="${path}/resources/css/bootstrapTemplate/signin.css" rel="stylesheet"> --%>
+<link type="text/css" href="${path}/resources/css/bootstrapTemplate/signin.css" rel="stylesheet">
 </head>
   <body>
     <div class="container">

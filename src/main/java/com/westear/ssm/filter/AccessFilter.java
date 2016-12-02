@@ -14,29 +14,50 @@ import javax.servlet.http.HttpSession;
 
 public class AccessFilter implements Filter{
 
-	private boolean logined = false;
+	private boolean doFilter = true;
+	private String uri = "";
 	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
+
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		this.doFilter = true;
 		//HttpServletRequest,HttpServletResponse both extends ServletRequest,ServletResponse;
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		HttpSession session = req.getSession();
-		if(session.getAttribute("loginUser") != null 
-				&& !"".equals(session.getAttribute("loginUser"))){
-			this.logined = true;
-			chain.doFilter(req, resp);
+		//获得当前访问的uri
+		uri = req.getRequestURI();
+		//不用过滤的uri类型
+		String[] noFilter = {".css",".js",".jpg",".gif",".png"};
+		//uri的类型
+		String uriType = "";
+		for(String s : noFilter){
+			//获得uri的类型
+			int index = uri.lastIndexOf(s, uri.length()-1);
+			if(index != -1){
+				uriType = uri.substring(index);
+			}
+			if(s.equals(uriType)){ 	//如果uri类型为不需要过滤的类型则跳出，并且不执行过滤代码段
+				this.doFilter = false;
+				break;
+			}
 		}
-		if(!this.logined){
-			//
-			req.getRequestDispatcher("/user/login").forward(req, resp);
-			return;
+		//如果过滤
+		if(this.doFilter){
+			if(session.getAttribute("loginUser") != null 
+					&& !"".equals(session.getAttribute("loginUser"))){
+				chain.doFilter(req, resp);
+			}else{
+				req.getRequestDispatcher("/user/login").forward(req, resp);
+				return;
+			}
+		}else{	//如果不过滤
+			chain.doFilter(req, resp);
 		}
 	}
 
