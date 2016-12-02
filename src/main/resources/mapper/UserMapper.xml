@@ -68,4 +68,10 @@
       PSW = #{psw,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=VARCHAR}
   </update>
+  
+  <select id="selectUserByUsername" parameterType="java.lang.String">
+  	select <include refid="Base_Column_List" />
+  	from W_USER
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </select>
 </mapper>
