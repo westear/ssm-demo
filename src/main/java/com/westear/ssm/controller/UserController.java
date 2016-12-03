@@ -54,13 +54,13 @@ public class UserController {
 		User u = (User)req.getSession().getAttribute("loginUser");
 		if(u != null){
 			model.addAttribute("user", u);
-			return "jsp/common/home";
+			return "common/home";
 		}else{
 			boolean loginSuccess = this.userService.login(req, resp, user);
 			if(loginSuccess){
-				return "jsp/common/home";
+				return "common/home";
 			}else{
-				return "jsp/common/login";
+				return "common/login";
 			}
 		}
 	}

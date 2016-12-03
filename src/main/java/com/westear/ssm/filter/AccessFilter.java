@@ -13,7 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AccessFilter implements Filter{
-
+	
+	private static final String noFilter = "/resources/";	//不用过滤的uri
 	private boolean doFilter = true;
 	private String uri = "";
 	
@@ -33,28 +34,23 @@ public class AccessFilter implements Filter{
 		//获得当前访问的uri
 		uri = req.getRequestURI();
 		//不用过滤的uri类型
-		String[] noFilter = {".css",".js",".jpg",".gif",".png"};
-		//uri的类型
-		String uriType = "";
-		for(String s : noFilter){
-			//获得uri的类型
-			int index = uri.lastIndexOf(s, uri.length()-1);
-			if(index != -1){
-				uriType = uri.substring(index);
-			}
-			if(s.equals(uriType)){ 	//如果uri类型为不需要过滤的类型则跳出，并且不执行过滤代码段
-				this.doFilter = false;
-				break;
-			}
+		if(uri.indexOf(req.getContextPath()+noFilter) != -1){
+			this.doFilter = false;
 		}
 		//如果过滤
 		if(this.doFilter){
 			if(session.getAttribute("loginUser") != null 
 					&& !"".equals(session.getAttribute("loginUser"))){
+				req.getRequestDispatcher("/common/home").forward(req, resp);
 				chain.doFilter(req, resp);
 			}else{
-				req.getRequestDispatcher("/user/login").forward(req, resp);
-				return;
+				if(uri.indexOf("/user/userLogin") != -1){
+					req.getRequestDispatcher("/user/userLogin").forward(req, resp);
+					chain.doFilter(req, resp);
+				}else{
+					req.getRequestDispatcher("/user/login").forward(req, resp);
+					return;
+				}
 			}
 		}else{	//如果不过滤
 			chain.doFilter(req, resp);
