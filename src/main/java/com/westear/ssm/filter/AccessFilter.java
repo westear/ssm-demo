@@ -46,11 +46,10 @@ public class AccessFilter implements Filter{
 			}else{
 				if(uri.indexOf("/user/userLogin") != -1){
 					req.getRequestDispatcher("/user/userLogin").forward(req, resp);
-					chain.doFilter(req, resp);
 				}else{
 					req.getRequestDispatcher("/user/login").forward(req, resp);
-					return;
 				}
+				chain.doFilter(req, resp);
 			}
 		}else{	//如果不过滤
 			chain.doFilter(req, resp);
