@@ -20,12 +20,18 @@
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.westear.ssm.model.User" >
+  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+  		select sys_guid() from dual
+  	</selectKey>
     insert into W_USER (ID, USERNAME, PSW
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{psw,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.westear.ssm.model.User" >
+  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+  		select sys_guid() from dual
+  	</selectKey>
     insert into W_USER
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >

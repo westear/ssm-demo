@@ -87,5 +87,8 @@
   <!-- 此后的所有servlet的初始化都按照以上方式创建，
   	       初始化自己的上下文环境，将WebApplicationContext设置为自己的父上下文环境 -->
   	       
-  	       
+  <!-- Session超时时间 -->  
+  <session-config>
+  	<session-timeout>20</session-timeout>
+  </session-config>	       
 </web-app>
