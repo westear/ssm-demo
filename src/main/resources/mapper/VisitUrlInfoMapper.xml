@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.westear.ssm.dao.VisitUrlInfoMapper">
+  <resultMap id="BaseResultMap" type="com.westear.ssm.model.VisitUrlInfo">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="VISIT_URL" jdbcType="VARCHAR" property="visitUrl" />
+    <result column="VISIT_TIME" jdbcType="TIMESTAMP" property="visitTime" />
+    <result column="VISIT_IP" jdbcType="VARCHAR" property="visitIp" />
+    <result column="VISIT_COUNTRY" jdbcType="VARCHAR" property="visitCountry" />
+    <result column="LEAVE_TIME" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="VISIT_COUNT" jdbcType="DECIMAL" property="visitCount" />
+  </resultMap>
+  <insert id="insert" parameterType="com.westear.ssm.model.VisitUrlInfo">
+    insert into W_VISIT_URL_INFO (ID, USER_ID, VISIT_URL, 
+      VISIT_TIME, VISIT_IP, VISIT_COUNTRY, 
+      LEAVE_TIME, VISIT_COUNT)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{visitUrl,jdbcType=VARCHAR}, 
+      #{visitTime,jdbcType=TIMESTAMP}, #{visitIp,jdbcType=VARCHAR}, #{visitCountry,jdbcType=VARCHAR}, 
+      #{leaveTime,jdbcType=TIMESTAMP}, #{visitCount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.westear.ssm.model.VisitUrlInfo">
+    insert into W_VISIT_URL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="visitUrl != null">
+        VISIT_URL,
+      </if>
+      <if test="visitTime != null">
+        VISIT_TIME,
+      </if>
+      <if test="visitIp != null">
+        VISIT_IP,
+      </if>
+      <if test="visitCountry != null">
+        VISIT_COUNTRY,
+      </if>
+      <if test="leaveTime != null">
+        LEAVE_TIME,
+      </if>
+      <if test="visitCount != null">
+        VISIT_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUrl != null">
+        #{visitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTime != null">
+        #{visitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitIp != null">
+        #{visitIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitCountry != null">
+        #{visitCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitCount != null">
+        #{visitCount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.westear.ssm.model.VisitUrlInfo">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="VISIT_URL" jdbcType="VARCHAR" property="visitUrl" />
+    <result column="VISIT_TIME" jdbcType="TIMESTAMP" property="visitTime" />
+    <result column="VISIT_IP" jdbcType="VARCHAR" property="visitIp" />
+    <result column="VISIT_COUNTRY" jdbcType="VARCHAR" property="visitCountry" />
+    <result column="LEAVE_TIME" jdbcType="TIMESTAMP" property="leaveTime" />
+    <result column="VISIT_COUNT" jdbcType="DECIMAL" property="visitCount" />
+  </resultMap>
+  <insert id="insert" parameterType="com.westear.ssm.model.VisitUrlInfo">
+  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+  		select sys_guid() from dual
+  	</selectKey>
+    insert into W_VISIT_URL_INFO (ID, USER_ID, VISIT_URL, 
+      VISIT_TIME, VISIT_IP, VISIT_COUNTRY, 
+      LEAVE_TIME, VISIT_COUNT)
+    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{visitUrl,jdbcType=VARCHAR}, 
+      #{visitTime,jdbcType=TIMESTAMP}, #{visitIp,jdbcType=VARCHAR}, #{visitCountry,jdbcType=VARCHAR}, 
+      #{leaveTime,jdbcType=TIMESTAMP}, #{visitCount,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.westear.ssm.model.VisitUrlInfo">
+  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
+  		select sys_guid() from dual
+  	</selectKey>
+    insert into W_VISIT_URL_INFO
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="visitUrl != null">
+        VISIT_URL,
+      </if>
+      <if test="visitTime != null">
+        VISIT_TIME,
+      </if>
+      <if test="visitIp != null">
+        VISIT_IP,
+      </if>
+      <if test="visitCountry != null">
+        VISIT_COUNTRY,
+      </if>
+      <if test="leaveTime != null">
+        LEAVE_TIME,
+      </if>
+      <if test="visitCount != null">
+        VISIT_COUNT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="visitUrl != null">
+        #{visitUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="visitTime != null">
+        #{visitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitIp != null">
+        #{visitIp,jdbcType=VARCHAR},
+      </if>
+      <if test="visitCountry != null">
+        #{visitCountry,jdbcType=VARCHAR},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitCount != null">
+        #{visitCount,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+</mapper>
