@@ -48,20 +48,15 @@ public class UserController {
 		return "common/login";
 	}
 	
-	@RequestMapping(value="/userLogin",method=RequestMethod.POST)
+	@RequestMapping(value="/userLogin")
 	public String loginUser(HttpServletRequest req, HttpServletResponse resp, 
 			User user,Model model){
-		User u = (User)req.getSession().getAttribute("loginUser");
-		if(u != null){
-			model.addAttribute("user", u);
+		user = this.userService.login(req, resp, user);
+		if(user != null){
+			model.addAttribute("user", user);
 			return "common/home";
 		}else{
-			boolean loginSuccess = this.userService.login(req, resp, user);
-			if(loginSuccess){
-				return "common/home";
-			}else{
-				return "common/login";
-			}
+			return "common/login";
 		}
 	}
 }

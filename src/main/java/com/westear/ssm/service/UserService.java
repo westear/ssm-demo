@@ -11,5 +11,5 @@ public interface UserService {
 	
 	User getUserById(String Id);
 	
-	boolean login(HttpServletRequest req, HttpServletResponse resp,User user);
+	User login(HttpServletRequest req, HttpServletResponse resp,User user);
 }

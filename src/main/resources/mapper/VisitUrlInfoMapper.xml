@@ -11,6 +11,87 @@
     <result column="LEAVE_TIME" jdbcType="TIMESTAMP" property="leaveTime" />
     <result column="VISIT_COUNT" jdbcType="DECIMAL" property="visitCount" />
   </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, USER_ID, VISIT_URL, VISIT_TIME, VISIT_IP, VISIT_COUNTRY, LEAVE_TIME, VISIT_COUNT
+  </sql>
+  <select id="selectByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from W_VISIT_URL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample">
+    delete from W_VISIT_URL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
   <insert id="insert" parameterType="com.westear.ssm.model.VisitUrlInfo">
     insert into W_VISIT_URL_INFO (ID, USER_ID, VISIT_URL, 
       VISIT_TIME, VISIT_IP, VISIT_COUNTRY, 
@@ -74,83 +155,56 @@
       </if>
     </trim>
   </insert>
-  <resultMap id="BaseResultMap" type="com.westear.ssm.model.VisitUrlInfo">
-    <result column="ID" jdbcType="VARCHAR" property="id" />
-    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
-    <result column="VISIT_URL" jdbcType="VARCHAR" property="visitUrl" />
-    <result column="VISIT_TIME" jdbcType="TIMESTAMP" property="visitTime" />
-    <result column="VISIT_IP" jdbcType="VARCHAR" property="visitIp" />
-    <result column="VISIT_COUNTRY" jdbcType="VARCHAR" property="visitCountry" />
-    <result column="LEAVE_TIME" jdbcType="TIMESTAMP" property="leaveTime" />
-    <result column="VISIT_COUNT" jdbcType="DECIMAL" property="visitCount" />
-  </resultMap>
-  <insert id="insert" parameterType="com.westear.ssm.model.VisitUrlInfo">
-  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
-  		select sys_guid() from dual
-  	</selectKey>
-    insert into W_VISIT_URL_INFO (ID, USER_ID, VISIT_URL, 
-      VISIT_TIME, VISIT_IP, VISIT_COUNTRY, 
-      LEAVE_TIME, VISIT_COUNT)
-    values (#{id,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{visitUrl,jdbcType=VARCHAR}, 
-      #{visitTime,jdbcType=TIMESTAMP}, #{visitIp,jdbcType=VARCHAR}, #{visitCountry,jdbcType=VARCHAR}, 
-      #{leaveTime,jdbcType=TIMESTAMP}, #{visitCount,jdbcType=DECIMAL})
-  </insert>
-  <insert id="insertSelective" parameterType="com.westear.ssm.model.VisitUrlInfo">
-  	<selectKey keyProperty="id" resultType="java.lang.String" order="BEFORE">
-  		select sys_guid() from dual
-  	</selectKey>
-    insert into W_VISIT_URL_INFO
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        ID,
+  <select id="countByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample" resultType="java.lang.Integer">
+    select count(*) from W_VISIT_URL_INFO
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update W_VISIT_URL_INFO
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null">
-        USER_ID,
+      <if test="record.userId != null">
+        USER_ID = #{record.userId,jdbcType=VARCHAR},
       </if>
-      <if test="visitUrl != null">
-        VISIT_URL,
+      <if test="record.visitUrl != null">
+        VISIT_URL = #{record.visitUrl,jdbcType=VARCHAR},
       </if>
-      <if test="visitTime != null">
-        VISIT_TIME,
+      <if test="record.visitTime != null">
+        VISIT_TIME = #{record.visitTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitIp != null">
-        VISIT_IP,
+      <if test="record.visitIp != null">
+        VISIT_IP = #{record.visitIp,jdbcType=VARCHAR},
       </if>
-      <if test="visitCountry != null">
-        VISIT_COUNTRY,
+      <if test="record.visitCountry != null">
+        VISIT_COUNTRY = #{record.visitCountry,jdbcType=VARCHAR},
       </if>
-      <if test="leaveTime != null">
-        LEAVE_TIME,
+      <if test="record.leaveTime != null">
+        LEAVE_TIME = #{record.leaveTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="visitCount != null">
-        VISIT_COUNT,
+      <if test="record.visitCount != null">
+        VISIT_COUNT = #{record.visitCount,jdbcType=DECIMAL},
       </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=VARCHAR},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=VARCHAR},
-      </if>
-      <if test="visitUrl != null">
-        #{visitUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="visitTime != null">
-        #{visitTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="visitIp != null">
-        #{visitIp,jdbcType=VARCHAR},
-      </if>
-      <if test="visitCountry != null">
-        #{visitCountry,jdbcType=VARCHAR},
-      </if>
-      <if test="leaveTime != null">
-        #{leaveTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="visitCount != null">
-        #{visitCount,jdbcType=DECIMAL},
-      </if>
-    </trim>
-  </insert>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update W_VISIT_URL_INFO
+    set ID = #{record.id,jdbcType=VARCHAR},
+      USER_ID = #{record.userId,jdbcType=VARCHAR},
+      VISIT_URL = #{record.visitUrl,jdbcType=VARCHAR},
+      VISIT_TIME = #{record.visitTime,jdbcType=TIMESTAMP},
+      VISIT_IP = #{record.visitIp,jdbcType=VARCHAR},
+      VISIT_COUNTRY = #{record.visitCountry,jdbcType=VARCHAR},
+      LEAVE_TIME = #{record.leaveTime,jdbcType=TIMESTAMP},
+      VISIT_COUNT = #{record.visitCount,jdbcType=DECIMAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
 </mapper>

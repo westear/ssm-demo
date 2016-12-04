@@ -17,12 +17,12 @@ import com.westear.ssm.service.UserService;
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
-	private UserMapper UserMapper;
+	private UserMapper userMapper;
 	
 	@Override
 	public void addUser(User user) {
-		if(UserMapper != null){
-			UserMapper.insert(user);
+		if(userMapper != null){
+			userMapper.insert(user);
 			System.out.println("=======>in addUser serviceImpl");
 		}
 	}
@@ -30,17 +30,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserById(String id) {
 		System.out.println("=======>in getUserById serviceImpl");
-		return this.UserMapper.selectByPrimaryKey(id);
+		return this.userMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
-	public boolean login(HttpServletRequest req, HttpServletResponse resp,User user) {
-		User u = this.UserMapper.selectUserByUsername(user.getUsername());
-		if(EncryptPsw.encryptByMD(user.getPsw()).equals(u.getPsw())){
-			req.getSession().setAttribute("loginUser", u);
-			return true;
+	public User login(HttpServletRequest req, HttpServletResponse resp,User user) {
+		if(user.getUsername() != null && !"".equals(user.getUsername()) && user.getPsw() != null && !"".equals(user.getPsw())){
+			User u = this.userMapper.selectUserByUsername(user.getUsername());
+			if(EncryptPsw.encryptByMD(user.getPsw()).equals(u.getPsw())){
+				req.getSession().setAttribute("loginUser", u);
+				return u;
+			}else{
+				return null;
+			}
 		}else{
-			return false;
+			return null;
 		}
 	}
 

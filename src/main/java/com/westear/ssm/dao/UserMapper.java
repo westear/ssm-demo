@@ -3,7 +3,7 @@ package com.westear.ssm.dao;
 import com.westear.ssm.model.User;
 
 public interface UserMapper {
-    int deleteByPrimaryKey(String id);
+	int deleteByPrimaryKey(String id);
 
     int insert(User record);
 
