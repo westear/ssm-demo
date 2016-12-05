@@ -1,4 +1,4 @@
-package com.westear.ssm.model;
+package com.westear.ssm.model.user;
 
 public class User {
     private String id;

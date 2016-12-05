@@ -1,8 +1,10 @@
-package com.westear.ssm.dao;
+package com.westear.ssm.dao.manager;
 
-import com.westear.ssm.model.VisitUrlInfo;
-import com.westear.ssm.model.VisitUrlInfoExample;
+import com.westear.ssm.model.manager.VisitUrlInfo;
+import com.westear.ssm.model.manager.VisitUrlInfoExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface VisitUrlInfoMapper {

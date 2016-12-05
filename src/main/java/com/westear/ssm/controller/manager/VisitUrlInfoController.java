@@ -1,4 +1,4 @@
-package com.westear.ssm.controller;
+package com.westear.ssm.controller.manager;
 
 public class VisitUrlInfoController {
 

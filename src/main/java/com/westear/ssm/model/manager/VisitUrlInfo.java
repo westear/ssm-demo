@@ -1,4 +1,4 @@
-package com.westear.ssm.model;
+package com.westear.ssm.model.manager;
 
 import java.util.Date;
 

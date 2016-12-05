@@ -1,4 +1,4 @@
-package com.westear.ssm.service.impl;
+package com.westear.ssm.service.impl.user;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.westear.ssm.common.util.EncryptPsw;
-import com.westear.ssm.dao.UserMapper;
-import com.westear.ssm.model.User;
-import com.westear.ssm.service.UserService;
+import com.westear.ssm.dao.user.UserMapper;
+import com.westear.ssm.model.user.User;
+import com.westear.ssm.service.user.UserService;
 
 @Service("userService")
 @Transactional
@@ -37,15 +37,15 @@ public class UserServiceImpl implements UserService {
 	public User login(HttpServletRequest req, HttpServletResponse resp,User user) {
 		if(user.getUsername() != null && !"".equals(user.getUsername()) && user.getPsw() != null && !"".equals(user.getPsw())){
 			User u = this.userMapper.selectUserByUsername(user.getUsername());
-			if(EncryptPsw.encryptByMD(user.getPsw()).equals(u.getPsw())){
-				req.getSession().setAttribute("loginUser", u);
-				return u;
-			}else{
-				return null;
+			if(u != null){
+				if(EncryptPsw.encryptByMD(user.getPsw()).equals(u.getPsw())){
+					req.getSession().setAttribute("loginUser", u);
+					req.getSession().setAttribute("ip", req.getLocalAddr());
+					return u;
+				}
 			}
-		}else{
-			return null;
 		}
+		return null;
 	}
 
 }

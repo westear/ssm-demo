@@ -1,6 +1,6 @@
-package com.westear.ssm.dao;
+package com.westear.ssm.dao.user;
 
-import com.westear.ssm.model.User;
+import com.westear.ssm.model.user.User;
 
 public interface UserMapper {
 	int deleteByPrimaryKey(String id);

@@ -33,17 +33,6 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   
-  <!-- 判断当前登录用户是否已经登录过，session失效时间为默认的30min -->
-  <filter>
-  	<filter-name>AccessFilter</filter-name>
-  	<filter-class>com.westear.ssm.filter.AccessFilter</filter-class>
-  	<async-supported>true</async-supported> <!-- 异步支持 -->
-  </filter>
-  <filter-mapping>
-  	<filter-name>AccessFilter</filter-name>
-  	<url-pattern>/*</url-pattern>
-  </filter-mapping>
-  
   <!-- Spring应用上下文，理解层次化的ApplicationContext,
   		父上下文不能访问子上下文，而子上下文可以访问父上下文 -->
   <!-- 在应用完全启动完成之前调用listener实现ContextLoaderListener，
@@ -87,6 +76,24 @@
   </servlet-mapping>
   <!-- 此后的所有servlet的初始化都按照以上方式创建，
   	       初始化自己的上下文环境，将WebApplicationContext设置为自己的父上下文环境 -->
+  	       
+  <!-- 判断当前登录用户是否已经登录过，session失效时间为默认的30min -->
+  <filter>
+  	<filter-name>AccessFilter</filter-name>
+  	<filter-class>com.westear.ssm.filter.AccessFilter</filter-class>
+  	<async-supported>true</async-supported> <!-- 异步支持 -->
+  </filter>
+  <filter-mapping>
+  	<filter-name>AccessFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+  <!-- 在线登录用户统计监听器 -->
+  <listener>
+  	<listener-class>
+  		com.westear.ssm.listener.UserOnlineListener
+  	</listener-class>
+  </listener>
   	       
   <!-- Session超时时间 -->  
   <session-config>

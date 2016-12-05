@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.westear.ssm.dao.VisitUrlInfoMapper">
-  <resultMap id="BaseResultMap" type="com.westear.ssm.model.VisitUrlInfo">
+<mapper namespace="com.westear.ssm.dao.manager.VisitUrlInfoMapper">
+  <resultMap id="BaseResultMap" type="com.westear.ssm.model.manager.VisitUrlInfo">
     <result column="ID" jdbcType="VARCHAR" property="id" />
     <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
     <result column="VISIT_URL" jdbcType="VARCHAR" property="visitUrl" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     ID, USER_ID, VISIT_URL, VISIT_TIME, VISIT_IP, VISIT_COUNTRY, LEAVE_TIME, VISIT_COUNT
   </sql>
-  <select id="selectByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.westear.ssm.model.manager.VisitUrlInfoExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -86,13 +86,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample">
+  <delete id="deleteByExample" parameterType="com.westear.ssm.model.manager.VisitUrlInfoExample">
     delete from W_VISIT_URL_INFO
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.westear.ssm.model.VisitUrlInfo">
+  <insert id="insert" parameterType="com.westear.ssm.model.manager.VisitUrlInfo">
     insert into W_VISIT_URL_INFO (ID, USER_ID, VISIT_URL, 
       VISIT_TIME, VISIT_IP, VISIT_COUNTRY, 
       LEAVE_TIME, VISIT_COUNT)
@@ -100,7 +100,7 @@
       #{visitTime,jdbcType=TIMESTAMP}, #{visitIp,jdbcType=VARCHAR}, #{visitCountry,jdbcType=VARCHAR}, 
       #{leaveTime,jdbcType=TIMESTAMP}, #{visitCount,jdbcType=DECIMAL})
   </insert>
-  <insert id="insertSelective" parameterType="com.westear.ssm.model.VisitUrlInfo">
+  <insert id="insertSelective" parameterType="com.westear.ssm.model.manager.VisitUrlInfo">
     insert into W_VISIT_URL_INFO
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,7 +155,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.westear.ssm.model.VisitUrlInfoExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.westear.ssm.model.manager.VisitUrlInfoExample" resultType="java.lang.Integer">
     select count(*) from W_VISIT_URL_INFO
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />

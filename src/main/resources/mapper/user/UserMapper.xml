@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.westear.ssm.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.westear.ssm.model.User">
+<mapper namespace="com.westear.ssm.dao.user.UserMapper">
+  <resultMap id="BaseResultMap" type="com.westear.ssm.model.user.User">
     <result column="ID" jdbcType="VARCHAR" property="id" />
     <result column="USERNAME" jdbcType="VARCHAR" property="username" />
     <result column="PSW" jdbcType="VARCHAR" property="psw" />
   </resultMap>
-  <insert id="insert" parameterType="com.westear.ssm.model.User">
+  <insert id="insert" parameterType="com.westear.ssm.model.user.User">
     insert into W_USER (ID, USERNAME, PSW
       )
     values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{psw,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.westear.ssm.model.User">
+  <insert id="insertSelective" parameterType="com.westear.ssm.model.user.User">
     insert into W_USER
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -50,7 +50,7 @@
     delete from W_USER
     where ID = #{id,jdbcType=VARCHAR}
   </delete>
-  <update id="updateByPrimaryKeySelective" parameterType="com.westear.ssm.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.westear.ssm.model.user.User">
     update W_USER
     <set>
       <if test="username != null">
@@ -62,7 +62,7 @@
     </set>
     where ID = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.westear.ssm.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.westear.ssm.model.user.User">
     update W_USER
     set USERNAME = #{username,jdbcType=VARCHAR},
       PSW = #{psw,jdbcType=VARCHAR}
