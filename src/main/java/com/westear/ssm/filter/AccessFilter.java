@@ -43,19 +43,16 @@ public class AccessFilter extends OncePerRequestFilter{
 		}
 		//如果过滤
 		if(this.doFilter){
-			if(session.getAttribute("loginUser") != null){
-				req.getRequestDispatcher("/common/home").forward(req, resp);
-				return;
-			}else{
+			if(session.getAttribute("loginUser") == null){
 				if(uri.indexOf("/user/userLogin") != -1){
-					req.getRequestDispatcher("/user/userLogin").forward(req, resp);
+					filterChain.doFilter(req, resp);
 				}else{
 					req.getRequestDispatcher("/user/login").forward(req, resp);
-					return;
 				}
+			}else{
+				req.getRequestDispatcher("/common/home").forward(req, resp);
 			}
 		}
-		filterChain.doFilter(req, resp);
 	}
 	
 	@Override
