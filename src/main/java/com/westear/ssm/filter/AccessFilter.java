@@ -19,7 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class AccessFilter extends OncePerRequestFilter{
 	
 	private static final String noFilter = "/resources/";	//不用过滤的uri
-	private static final String loginUrl ="jsp/common/login.jsp";
+	private static final String loginUrl ="/user/login";
 	private boolean doFilter = true;
 	private String uri = "";
 	
@@ -38,7 +38,7 @@ public class AccessFilter extends OncePerRequestFilter{
 		if(uri.indexOf(req.getContextPath()+noFilter) != -1){
 			this.doFilter = false;
 		}
-		if(uri.indexOf(loginUrl) != -1){
+		if(uri.indexOf(req.getContextPath()+loginUrl) != -1){
 			this.doFilter = false;
 		}
 		//如果过滤
@@ -50,7 +50,7 @@ public class AccessFilter extends OncePerRequestFilter{
 				if(uri.indexOf("/user/userLogin") != -1){
 					req.getRequestDispatcher("/user/userLogin").forward(req, resp);
 				}else{
-					resp.sendRedirect("jsp/common/login.jsp");
+					req.getRequestDispatcher("/user/login").forward(req, resp);
 					return;
 				}
 			}
