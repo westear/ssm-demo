@@ -2,30 +2,31 @@ package com.westear.ssm.filter;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AccessFilter implements Filter{
+import org.springframework.web.filter.OncePerRequestFilter;
+/**
+ * 登录验证过滤器，如果用户已登录，信息存于Session中
+ * 继承org.springframework.web.filter.OncePerRequestFilter 在servlet3.0以上版本中，
+ * Spring实现了多线程异步回调filter,并确保只执行一次请求
+ * @author westear
+ * @see #OncePerRequestFilter
+ */
+public class AccessFilter extends OncePerRequestFilter{
 	
 	private static final String noFilter = "/resources/";	//不用过滤的uri
+	private static final String loginUrl ="jsp/common/login.jsp";
 	private boolean doFilter = true;
 	private String uri = "";
 	
 	@Override
-	public void init(FilterConfig filterConfig) throws ServletException {
-
-	}
-
-	@Override
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	protected void doFilterInternal(HttpServletRequest request,
+			HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
 		this.doFilter = true;
 		//HttpServletRequest,HttpServletResponse both extends ServletRequest,ServletResponse;
 		HttpServletRequest req = (HttpServletRequest) request;
@@ -37,25 +38,26 @@ public class AccessFilter implements Filter{
 		if(uri.indexOf(req.getContextPath()+noFilter) != -1){
 			this.doFilter = false;
 		}
+		if(uri.indexOf(loginUrl) != -1){
+			this.doFilter = false;
+		}
 		//如果过滤
 		if(this.doFilter){
-			if(session.getAttribute("loginUser") != null 
-					&& !"".equals(session.getAttribute("loginUser"))){
+			if(session.getAttribute("loginUser") != null){
 				req.getRequestDispatcher("/common/home").forward(req, resp);
-				chain.doFilter(req, resp);
+				return;
 			}else{
 				if(uri.indexOf("/user/userLogin") != -1){
 					req.getRequestDispatcher("/user/userLogin").forward(req, resp);
 				}else{
-					req.getRequestDispatcher("/user/login").forward(req, resp);
+					resp.sendRedirect("jsp/common/login.jsp");
+					return;
 				}
-				chain.doFilter(req, resp);
 			}
-		}else{	//如果不过滤
-			chain.doFilter(req, resp);
 		}
+		filterChain.doFilter(req, resp);
 	}
-
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub

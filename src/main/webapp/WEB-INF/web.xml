@@ -37,6 +37,7 @@
   <filter>
   	<filter-name>AccessFilter</filter-name>
   	<filter-class>com.westear.ssm.filter.AccessFilter</filter-class>
+  	<async-supported>true</async-supported> <!-- 异步支持 -->
   </filter>
   <filter-mapping>
   	<filter-name>AccessFilter</filter-name>
