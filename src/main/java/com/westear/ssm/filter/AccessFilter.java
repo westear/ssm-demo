@@ -50,7 +50,7 @@ public class AccessFilter extends OncePerRequestFilter{
 					req.getRequestDispatcher("/user/login").forward(req, resp);
 				}
 			}else{
-				req.getRequestDispatcher("/common/home").forward(req, resp);
+				filterChain.doFilter(req, resp);
 			}
 		}
 	}
